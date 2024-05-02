@@ -18,6 +18,29 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "pretty": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths"
+      },
+      {
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true
+      },
+    ],
+    "paths": {
+      // Features
+      "@auth/*": ["src/features/auth/*"],
+      "@user/*": ["src/features/user/*"],
+
+      // Shared
+      "@globals/*": ["src/shared/globals/*"],
+      "@services/*": ["src/shared/services/*"],
+      "@socket/*": ["src/shared/socket/*"],
+      "@workers/*": ["src/shared/workers/*"],
+
+      // Root
+      "@root/*": ["src/*"]
+    }
   }
 }

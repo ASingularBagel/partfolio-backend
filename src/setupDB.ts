@@ -1,8 +1,9 @@
-import mongoose from 'mongoose';
-import { config } from './config';
 import Logger from 'bunyan';
+import mongoose from 'mongoose';
+import { config } from '@root/config';
+import { redisConnection } from '@services/redis/redis.connection';
 
-const log: Logger = config.createLogger('GLADOS:SETUP_DB');
+const log: Logger = config.createLogger('SETUP_DB');
 
 export default () => {
   const connect = () => {
@@ -10,6 +11,7 @@ export default () => {
       .connect(`${config.DB_URI}`)
       .then(() => {
         log.info('Successfully connected to database.');
+        redisConnection.connect();
       })
       .catch((error: Error) => {
         log.error(error);

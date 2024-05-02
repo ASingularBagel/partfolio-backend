@@ -1,22 +1,21 @@
-import { config } from './config';
-
-import { createAdapter } from '@socket.io/redis-adapter';
 import compression from 'compression';
 import cookieSession from 'cookie-session';
 import cors from 'cors';
-import { Application, json, NextFunction, Request, Response, urlencoded } from 'express';
-import 'express-async-errors';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import http from 'http';
 import HTTP_STATUS from 'http-status-codes';
-import { createClient } from 'redis';
-import { Server as socketServer } from 'socket.io';
-import routeMiddleware from './routes';
-import { CustomError, IErrorResponse } from './shared/globals/helpers/error-handler';
 import Logger from 'bunyan';
+import routeMiddleware from '@root/routes';
+import { Application, json, NextFunction, Request, Response, urlencoded } from 'express';
+import { config } from '@root/config';
+import { createAdapter } from '@socket.io/redis-adapter';
+import { createClient } from 'redis';
+import { CustomError, IErrorResponse } from '@globals/helpers/error-handler';
+import { Server as socketServer } from 'socket.io';
+import 'express-async-errors';
 
-const log: Logger = config.createLogger('GLADOS:SETUP_SERVER'); // check back name for logger errors
+const log: Logger = config.createLogger('SETUP_SERVER'); // check back name for logger errors
 
 export class Server {
   private app: Application;
