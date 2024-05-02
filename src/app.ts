@@ -1,11 +1,11 @@
+import dbConnection from '@root/setupDB';
 import express, { Express } from 'express';
-import { Server } from './setupServer';
-import dbConnection from './setupDB';
-import { config } from './config';
+import { config } from '@root/config';
+import { Server } from '@root/setupServer';
 
 class App {
   public init(): void {
-    this.loadConfig(); // Verify env config
+    this.loadConfig();
     dbConnection(); // Check database connection
 
     const app: Express = express();
@@ -15,6 +15,7 @@ class App {
 
   private loadConfig() {
     config.validateConfig();
+    config.cloudinaryConfig();
   }
 }
 
